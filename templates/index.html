@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>TRANSCRIPTION</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <h1 style="text-align: center; color:yellowgreen; text-shadow:cornsilk; ">
+        WELCOME TO AUDIO TRANSCRIPTION
+    </h1>
+    <div style="text-align: center; font-style: italic; font-size:xx-large; color: coral;" id="countdown">
+        Click the Audio button to start
+    </div>
+    <div class="container">
+        Prediction:<br>
+        {% if output %}
+        <p>{{ output }}</p>
+        {% endif %}
+    </div>
+    <div class=" div1"><img class="audio-button " id="record" width="50px" src="static/audio.svg" alt="Record">
+        <form action="/result" method="POST">
+            <button class="transcribe" type="submit" id="result">TRANSCRIBE</button>
+        </form>
+    </div>
+    <div id="countdown-timer"></div>
+    <script>
+
+        var record = document.getElementById("record");
+        var xhr = new XMLHttpRequest();
+        var recording = false;
+        var data = new FormData();
+        record.onclick = function () {
+            recording = true;
+            xhr.open('POST', '/record', true);
+            xhr.send(data);
+        };
+
+        const button = document.getElementById("record");
+const timer = document.getElementById("countdown-timer");
+
+button.addEventListener("click", () => {
+  let count = 10;
+  timer.classList.remove("finished");
+  timer.innerText = count;
+
+  const countdownInterval = setInterval(() => {
+    count--;
+    timer.innerText = count;
+    if (count === 0) {
+      clearInterval(countdownInterval);
+      timer.classList.add("finished");
+    }
+  }, 1000);
+});
+
+
+    </script>
+</body>
+
+</html>

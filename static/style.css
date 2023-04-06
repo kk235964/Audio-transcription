@@ -1,0 +1,68 @@
+body {
+    background:darkslateblue;
+}
+
+.div1 {
+    display: flex;
+}
+.transcribe{
+    padding: 10px;
+    margin: 20px;
+    background: crimson;
+    color: white;
+    transition: transform 0.2s ease-in-out;
+}
+.transcribe:hover{
+    padding: 11px;
+    margin: 15px;
+    background: white;
+    color: red; 
+    transform: scale(1.1);
+}
+.container{
+    background: wheat;
+    font-size: larger;
+    color:darkslategray;
+    border:5px orange solid;
+    border-radius: 10px;
+    padding:10px;
+    margin-right:5px;
+    margin-top:5px;
+    height: 200px;
+    margin-inline: 20px;
+}
+
+.audio-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 5px orange solid;
+    display: flex;
+    margin-left: 40%;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .audio-button:hover {
+    transform: scale(1.1);
+    background: orange;
+  }
+
+  #countdown-timer {
+   border: 5px orange solid;
+   color:Red;
+   width:40px;
+   border-radius: 20px;
+   margin-left: 48%;
+   background: white;
+  font-size: 34px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#countdown-timer.finished {
+    color:orange;
+  
+}

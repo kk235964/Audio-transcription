@@ -8,11 +8,37 @@
 </head>
 
 <body>
-    <h1 style="text-align: center; color:yellowgreen; text-shadow:cornsilk; ">
-        WELCOME TO AUDIO TRANSCRIPTION
+
+    <div class="banner">
+        <div class="navbar">
+            <img src="/static/logo.jpeg" alt="Your Brand Name">
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">TEAM</a></li>
+               
+            </ul>
+        </div>
+    <h1 style="text-align: center; color:rgb(90, 78, 96); text-shadow:rgb(18, 156, 230);font-family:serif; ">
+        !!WELCOME TO AUDIO TRANSCRIPTION PROJECT!!
     </h1>
-    <div style="text-align: center; font-style: italic; font-size:xx-large; color: coral;" id="countdown">
-        Click the Audio button to start
+    <div style="text-align: center; font-style: italic; font-size:xx-large; color: rgb(38, 38, 235);" id="countdown">
+        Choose the Audio file to start
+    </div >
+    <div class="div2">
+        
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="container2">
+               <div class="box1"> <input type="file" name="file" accept=".wav"></input></div>
+                <div class="success">
+                {% if success %}
+                {{ success }}
+                {% endif %}</div>
+            </div>
+        
+            <button type="submit">Upload audio file</button>
+
+        </form>
     </div>
     <div class="container">
         Prediction:<br>
@@ -55,9 +81,26 @@ button.addEventListener("click", () => {
     }
   }, 1000);
 });
+document.getElementById('form').addEventListener('submit',functions(e)){
+            e.preventDefault();
 
+            const userFile =document.getElementById('file').files[0];
+            const userComments = document.getElementsById('comments').value;
+            const formData =new FormData();
+            formData.append('user-file',userFile,'user-file.wav');
+            formData.append('user-comments', userComments);
+
+            fetch('https://httpbin.org/post',{
+            method: "POST",
+            body: formData,
+                 })
+        .then(res=> res.json())
+        .then(data=> console.log(data))
+        .catch(err => console.log(err)); 
+        }
 
     </script>
+</div>
 </body>
-
 </html>
+

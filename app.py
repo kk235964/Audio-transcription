@@ -30,7 +30,7 @@ def CTCLoss(y_true, y_pred):
     return loss
 
 
-# loading the Model
+# loading the Model 
 model = load_model('models/notebook22.h5', custom_objects={'CTCLoss': CTCLoss})
 model.compile(loss=CTCLoss, optimizer='adam')
 
@@ -40,12 +40,18 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
+def index(): 
     return render_template('index.html')
+@app.route('/about')
+def about(): 
+    return render_template('about.html')
+@app.route('/team')
+def team():
+    return render_template('team.html')
 
 
 @app.route('/record', methods=['POST'])
-def recond():
+def record():
     filename = "wavefile/LJ001-0005.wav"
     chunk = 1024
     FORMAT = pyaudio.paInt16
@@ -79,6 +85,11 @@ def recond():
     return 'success'
 
     # csv file made
+@app.route('/upload', methods=['POST'])
+def upload():
+    file = request.files['file']
+    file.save('wavefile/LJ001-0005.wav')
+    return render_template('index.html', success = "Successfully Added !")
 
 
 @app.route('/result', methods=['POST'])
@@ -172,7 +183,7 @@ def result():
     print("." * 100)
     output = result
     return render_template('index.html', output=output)
-
-
+ 
+ 
 if __name__ == "__main__":
     app.run(debug=True)
